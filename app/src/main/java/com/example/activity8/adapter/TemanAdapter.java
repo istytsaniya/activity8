@@ -6,13 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.activity8.R;
 import com.example.activity8.database.Teman;
-import com.google.android.material.behavior.HideBottomViewOnScrollBehavior;
 
 import java.util.ArrayList;
 
@@ -23,14 +21,15 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
         this.listData = listData;
     }
 
-    public TemanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    @Override
+    public TemanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInf = LayoutInflater.from(parent.getContext());
         View view = layoutInf.inflate(R.layout.row_data_teman, parent, false);
         return new TemanViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TemanViewHolder holder, int position) {
+    public void onBindViewHolder(TemanViewHolder holder, int position) {
         String nm, tlp;
 
         nm = listData.get(position).getNama();
@@ -40,6 +39,12 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
         holder.namaTxt.setTextSize(20);
         holder.namaTxt.setText(nm);
         holder.telponTxt.setText(tlp);
+        holder.cardku.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
     }
 
     @Override
@@ -55,13 +60,6 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
             cardku = (CardView) view.findViewById(R.id.kartuku);
             namaTxt = (TextView) view.findViewById(R.id.textNama);
             telponTxt = (TextView) view.findViewById(R.id.textTelpon);
-            cardku.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-
-                    return true;
-                }
-            });
         }
     }
 }
